@@ -6,18 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/darkGray"
-    tools:context=".MainActivity">
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="WEEKLY VIEW"
-        android:textColor="@color/darkPink"
-        android:background="@null"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:onClick="weeklyAction"/>
+    tools:context=".WeekViewActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +24,7 @@
             android:background="@null"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:onClick="previousMonth"/>
+            android:onClick="previousWeek"/>
 
         <TextView
             android:id="@+id/currentMonthYearText"
@@ -52,12 +41,12 @@
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/forward"
+            android:text=">>"
             android:textColor="@color/darkPink"
             android:background="@null"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:onClick="nextMonth"/>
+            android:onClick="nextWeek"/>
     </LinearLayout>
 
     <LinearLayout
@@ -133,7 +122,24 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calendarRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD EVENT"
+        android:textColor="@color/pink"
+        android:background="@null"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:onClick="newEvent"/>
+
+    <ListView
+        android:id="@+id/eventListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"/>
 
 </LinearLayout>
