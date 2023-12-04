@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Barbeque_MCO2</string>
+    <string name="forward"><![CDATA[>>]]></string>
+    <string name="backward"><![CDATA[<<]]></string>
+</resources>
