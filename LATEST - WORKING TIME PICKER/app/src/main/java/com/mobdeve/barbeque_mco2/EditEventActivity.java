@@ -2,6 +2,8 @@ package com.mobdeve.barbeque_mco2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,8 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.time.LocalTime;
+import java.util.Locale;
 
 public class EditEventActivity extends AppCompatActivity {
     private int id;
@@ -25,7 +29,7 @@ public class EditEventActivity extends AppCompatActivity {
         initWidgets();
         time = LocalTime.now();
         eventDateText.setText("Date: " + CalendarUtils.formattedDate(CalendarUtils.selectedDate));
-        eventTimeText.setText("Time: " + CalendarUtils.formattedTime(time));
+        eventTimeText.setText("Time: " + CalendarUtils.formattedTime(time)); // CalendarUtils.formattedTime(time)
     }
 
     private void initWidgets() {
@@ -57,6 +61,7 @@ public class EditEventActivity extends AppCompatActivity {
         intent.setData(Uri.parse("mailto:")); // Email clients
         intent.setType("message/rfc822"); // Email clients
         startActivity(Intent.createChooser(intent, "Choose an Email Client:"));
+        saveEvent(view);
     }
 
     public void saveEvent(View view) {
@@ -69,5 +74,25 @@ public class EditEventActivity extends AppCompatActivity {
 
         db.addEventToDB(newEvent);
         finish();
+    }
+
+
+    int hour, minute;
+    public void selectTime(View view) {
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener(){
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute){
+                hour = selectedHour;
+                minute = selectedMinute;
+                eventTimeText.setText("Time: " + String.format(Locale.getDefault(),"%02d:%02d", hour, minute));
+            }
+        };
+
+        // SPINNER STYLE
+        int style = AlertDialog.THEME_HOLO_DARK;
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, style, onTimeSetListener, hour, minute, true);
+        timePickerDialog.setTitle("Select Time");
+        timePickerDialog.show();
     }
 }

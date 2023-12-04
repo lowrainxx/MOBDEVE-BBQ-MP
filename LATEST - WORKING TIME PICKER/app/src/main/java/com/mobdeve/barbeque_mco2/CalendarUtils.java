@@ -18,7 +18,7 @@ public class CalendarUtils {
 
     public static String formattedTime(LocalTime time){
         // to change time format into hours mins secs am/pm, default format of LocalTime is hh mm ss ns
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm");
         return time.format(formatter);
     }
 
